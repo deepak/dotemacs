@@ -1,0 +1,10 @@
+*~
+
+# geneated file from my-packages in init.el
+elpa
+
+# emacs working files
+places
+.smex-items
+auto-save-list
+backups
