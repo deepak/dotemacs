@@ -19,6 +19,8 @@
 		      markdown-mode
 		      yaml-mode
 		      marmalade
+                      maxframe
+                      exec-path-from-shell
                       zenburn-theme 
                       zen-and-art-theme
                       twilight-theme))

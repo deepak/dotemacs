@@ -1,10 +1,18 @@
 *~
 
-# geneated file from my-packages in init.el
+# generated file from my-packages in init.el
 elpa
+
+# compiled emacs files
+*.elc
 
 # emacs working files
 places
 .smex-items
 auto-save-list
 backups
+eshell
+
+# emacs temporary files
+.#*
+\#*
