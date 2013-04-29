@@ -7,12 +7,6 @@
 ;;; setting below does not override existing. so two alt keys
 ;; (setq mac-command-modifier 'alt)
 
-;;; set PATH from the login shell
-(eval-after-load 'exec-path-from-shell
-  '(progn
-     (when (memq window-system '(mac ns))
-       (exec-path-from-shell-initialize))))
-
 ;; load-theme uses deftheme - a emacs 24 feature
 (load-theme 'zenburn t)
 
@@ -52,3 +46,32 @@
 
 (define-key global-map [(s return)] 'toggle-maxframe)
 (add-hook 'window-setup-hook 'toggle-maxframe t)
+
+(defun set-path-from-login-shell ()
+  "Set PATH from login shell"
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+
+;;; set PATH from the login shell
+;;; needed for coffee-mode to load coffee command
+(add-hook 'after-init-hook 'set-path-from-login-shell)
+
+(defun coffee-custom ()
+  "coffee-mode-hook"
+  
+  ;; CoffeeScript uses two spaces.
+  (make-local-variable 'tab-width)
+  (set 'tab-width 2)
+  ;; If you don't want your compiled files to be wrapped
+  ;; (setq coffee-args-compile '("-c" "--bare"))
+  ;; Emacs key binding
+  (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)  
+  ;; Riding edge.
+  (setq coffee-command "/usr/local/share/npm/bin/coffee"))
+
+(eval-after-load 'coffee-mode
+  '(progn
+     (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
+     (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
+     (whitespace-mode)
+     (add-hook 'coffee-mode-hook '(lambda () (coffee-custom)))))

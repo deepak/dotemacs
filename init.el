@@ -21,6 +21,7 @@
 		      marmalade
                       maxframe
                       exec-path-from-shell
+                      coffee-mode
                       zenburn-theme 
                       zen-and-art-theme
                       twilight-theme))
